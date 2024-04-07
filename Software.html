@@ -65,84 +65,83 @@
     <!-- Phần thân trang -->
     <main>
       <div class="container" style="padding-top: 100px; padding-bottom: 30px; margin-bottom: -30px;">
-        <div class="card" style="max-width: max-container; margin-bottom: 20px;">
-          <div class="card-body">
-            <div class="LAB" style="display: flex; justify-content: space-between; align-items: center;">
-              <!-- Mã đề LAB -->
-              <div class="LAB_Title">
-                <h5 class="LAB_Title" style="font-weight: bold; margin: 0;">PRF192 - Programming Fundamental with C</h5>
-              </div>
-              <!-- Biểu tượng: Download File -->
-              <div class="card-link" style="display: block;">
-                <a href="https://sourceforge.net/projects/orwelldevcpp/" class="card-link" style="margin-right: 10px;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
-                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <!-- Tên đề bài LAB -->
-            <div class="LAB_Subtitle">
-              <h6 class="LAB_Subtitle" style="margin: 0;">Software Name: Dev C++</h6>
-            </div>
-          </div>
-        </div>
-
-          <div class="card" style="max-width: max-container; margin-bottom: 20px;">
-          <div class="card-body">
-            <div class="LAB" style="display: flex; justify-content: space-between; align-items: center;">
-              <!-- Mã đề LAB -->
-              <div class="LAB_Title">
-                <h5 class="LAB_Title" style="font-weight: bold; margin: 0;">PRO192 - Object-Oriented Programming</h5>
-                <h5 class="LAB_Title" style="font-weight: bold; margin: 0;">CSD201 - Data Structure and Algorithm</h5>
-                <h5 class="LAB_Title" style="font-weight: bold; margin: 0;">LAB211 - OOP with Java Lab</h5>
-              </div>
-              
- 
-            </div>
-            <!-- Tên đề bài LAB -->
-            <div class="LAB_Subtitle">
-              <h6 class="LAB_Subtitle" style="margin: 0;">Software Name: Netbeans 8.2 & JDK 8.1</h6>
-            </div>
-              <!-- Biểu tượng: Download File -->
-                <div class="row" style="width = max-row; display = flex;">
-                    <div class="col"> <!-- Sử dụng 50% chiều rộng trên các thiết bị có màn hình nhỏ hơn -->
-                        <a class="btn btn-primary" href="https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html#license-lightbox" role="button" style="margin: 5px;">Download Oracle JDK 8.1</a>
-                    </div>
-                    <div class="col"> <!-- Sử dụng 50% chiều rộng trên các thiết bị có màn hình nhỏ hơn -->
-                        <a class="btn btn-primary" href="https://netbeans-ide.informer.com/8.2/" role="button" style="margin: 5px;">Download NetBeans 8.2 IDE</a>
-                    </div>
-                    <div class="col"> <!-- Sử dụng 50% chiều rộng trên các thiết bị có màn hình nhỏ hơn -->
-                        <a class="btn btn-primary" href="https://www.oracle.com/java/technologies/java-archive-javase10-downloads.html" role="button" style="margin: 5px;">Download Oracle JDK 10</a>
-                    </div>
-                    <div class="col"> <!-- Sử dụng 50% chiều rộng trên các thiết bị có màn hình nhỏ hơn -->
-                        <a class="btn btn-primary" href="https://netbeans.apache.org/front/main/download/nb17/" role="button" style="margin: 5px;">Download NetBeans 17 IDE</a>
-                    </div>
-                </div>
-          </div>
-        </div>
-          
-          <div class="card" style="max-width: max-container; margin-bottom: 20px;">
-          <div class="card-body">
-            <div class="LAB" style="display: flex; justify-content: space-between; align-items: center;">
-              <!-- Mã đề LAB -->
-              <div class="LAB_Title">
-                <h5 class="LAB_Title" style="font-weight: bold; margin: 0;">DBI202 - Introduction to Database</h5>
-              </div>
-            </div>
-            <!-- Tên đề bài LAB -->
-            <div class="LAB_Subtitle">
-              <h6 class="LAB_Subtitle" style="margin: 0;">Software Name: SSMS & Microsoft SQL Server (for Windows)</h6>
-            </div>
-              <!-- Biểu tượng: Download File -->
-                <div class="row" style="width = max-row; display = flex;">
-                    <div class="col-sm-6"> <!-- Sử dụng 50% chiều rộng trên các thiết bị có màn hình nhỏ hơn -->
-                        <a class="btn btn-primary" href="https://drive.google.com/file/d/1OfuOGVDH7Hr0oYV3a4PK5rgtw2ByknBW/view?usp=sharing" role="button" style="margin: 5px;">Download SSMS 19 & Microsoft SQL Server (2019)</a>
-                    </div>
-                </div>
-          </div>
-        </div>
+        <table class="table">
+          <thead>
+            <tr style="text-align: center;">
+              <th scope="col">Subject Code</th>
+              <th scope="col">Software Name</th>
+              <th scope="col">Download</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">PRF192 - Programming Fundamental with C</th>
+              <td>Dev C++</td>
+              <td>
+                <a class="btn btn-primary" href="https://sourceforge.net/projects/orwelldevcpp/" role="button" style="margin: 5px;">Download</a>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="4">
+                <ul>
+                  <li>PRO192 - Object-Oriented Programming with Java</li>
+                  <li>CSD201 - Data Structure and Algorithm with Java</li>
+                  <li>LAB211 - OOP with Java LAB</li>
+                </ul>
+              </th>
+              <td>JDK 8.1</td>
+              <td>
+                <a class="btn btn-primary" href="https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html#license-lightbox" role="button" style="margin: 5px;">Download</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Netbeans 8.2</td>
+              <td>
+                <a class="btn btn-primary" href="https://netbeans-ide.informer.com/8.2/" role="button" style="margin: 5px;">Download</a>
+              </td>
+            </tr>
+            <tr>
+              <td>JDK 10</td>
+              <td>
+                <a class="btn btn-primary" href="https://www.oracle.com/java/technologies/java-archive-javase10-downloads.html" role="button" style="margin: 5px;">Download</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Netbeans 17</td>
+              <td>
+                <a class="btn btn-primary" href="https://archive.apache.org/dist/netbeans/netbeans-installers/17/Apache-NetBeans-17-bin-windows-x64.exe" role="button" style="margin: 5px;">Download</a>
+              </td>
+            </tr>
+            <tr>
+              <th>DBI202 - Introduction to Database</th>
+              <td>SSMS 19 & Microsoft SQL Server 2019</td>
+              <td>
+                <a class="btn btn-primary" href="https://drive.google.com/file/d/1OfuOGVDH7Hr0oYV3a4PK5rgtw2ByknBW/view?usp=sharing" role="button" style="margin: 5px;">Download</a>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="3">
+                PRJ301 - Java Web Application Development
+              </th>
+              <td>JDK 10</td>
+              <td>
+                <a class="btn btn-primary" href="https://www.oracle.com/java/technologies/java-archive-javase10-downloads.html" role="button" style="margin: 5px;">Download</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Netbeans 17</td>
+              <td>
+                <a class="btn btn-primary" href="https://archive.apache.org/dist/netbeans/netbeans-installers/17/Apache-NetBeans-17-bin-windows-x64.exe" role="button" style="margin: 5px;">Download</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Apache Tomcat 10</td>
+              <td>
+                <a class="btn btn-primary" href="https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.20/bin/apache-tomcat-10.1.20.exe" role="button" style="margin: 5px;">Download</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </main>
     <!-- Phần cuối trang -->
@@ -199,7 +198,5 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script> -->
-
 </body>
 </html>
