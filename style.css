@@ -1,0 +1,21 @@
+.container-fluid {
+  background-color: #1a3060;
+}
+
+body {
+  background-color: #1a3060;
+}
+
+header {
+  display: block;
+  background-color: #1a3060;
+}
+
+main {
+  display: list-item;
+  background-color: #1a3060;
+}
+
+footer{
+  background-color: #1a3060;
+}
