@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo Mã QR và Mã Vạch</title>
+    <!-- Thêm Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+        }
+
+        h1, h2 {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            border: none;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #0069d9;
+        }
+
+        .input-group {
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control {
+            border: none;
+            padding: 15px;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 0;
+            font-weight: bold;
+            padding: 10px 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .btn-success {
+            font-weight: bold;
+            padding: 10px 20px;
+        }
+
+        #qrcode img, #barcode {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+
+        #downloadQR, #downloadBarcode {
+            display: none;
+        }
+
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+        }
+
+        .toast {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .toast-header {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-5">Tạo Mã QR và Mã Vạch</h1>
+        
+        <!-- Phần tạo mã QR -->
+        <div class="card mb-5">
+            <div class="card-body">
+                <h2 class="card-title text-center">Tạo Mã QR</h2>
+                
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <input type="text" id="qrText" class="form-control" placeholder="Nhập văn bản hoặc URL" />
+                            <button class="btn btn-primary" onclick="generateQRCode()">Tạo Mã QR</button>
+                        </div>
+                        <p class="text-muted mt-2" style="font-style: italic;">Ví dụ: Nhập một URL như "https://example.com" hoặc văn bản như "Xin chào!". Mã QR có thể lưu trữ tối đa khoảng 4000 ký tự.</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div id="qrcode"></div>
+                        <a id="downloadQR" href="#" download="qrcode.png" class="btn btn-success mt-3">Tải Mã QR Xuống</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phần tạo mã vạch -->
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center">Tạo Mã Vạch</h2>
+                
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <input type="text" id="barcodeText" class="form-control" placeholder="Nhập văn bản cho mã vạch (chỉ số hoặc ký tự ASCII)" />
+                            <button class="btn btn-primary" onclick="generateBarcode()">Tạo Mã Vạch</button>
+                        </div>
+                        <p class="text-muted mt-2" style="font-style: italic;">Ví dụ: Nhập một chuỗi ký tự như "123456789" hoặc "CODE128". Mã vạch Code 128 chỉ hỗ trợ ký tự ASCII và có thể lưu trữ tối đa khoảng 80 ký tự.</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <svg id="barcode"></svg>
+                        <a id="downloadBarcode" href="#" download="barcode.png" class="btn btn-success mt-3">Tải Mã Vạch Xuống</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toasts -->
+    <div aria-live="polite" aria-atomic="true" class="position-relative">
+        <div class="toast-container" id="toastContainer">
+            <div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto" id="toastTitle">Thông báo</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" id="toastBody">
+                    Nội dung thông báo
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thêm thư viện qrcode -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+    <!-- Thêm thư viện JsBarcode -->
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+
+    <script>
+        function showToast(message, type = 'info') {
+            const toastTitle = document.getElementById('toastTitle');
+            const toastBody = document.getElementById('toastBody');
+            const toast = document.getElementById('toast');
+
+            toastTitle.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+            toastBody.textContent = message;
+
+            // Thay đổi màu sắc cho toast dựa trên loại
+            switch (type) {
+                case 'success':
+                    toast.classList.add('bg-success', 'text-white');
+                    toast.classList.remove('bg-danger', 'bg-warning', 'bg-info');
+                    break;
+                case 'error':
+                    toast.classList.add('bg-danger', 'text-white');
+                    toast.classList.remove('bg-success', 'bg-warning', 'bg-info');
+                    break;
+                case 'warning':
+                    toast.classList.add('bg-warning', 'text-dark');
+                    toast.classList.remove('bg-success', 'bg-danger', 'bg-info');
+                    break;
+                default:
+                    toast.classList.add('bg-info', 'text-white');
+                    toast.classList.remove('bg-success', 'bg-danger', 'bg-warning');
+                    break;
+            }
+
+            const bootstrapToast = new bootstrap.Toast(toast);
+            bootstrapToast.show();
+        }
+
+        function generateQRCode() {
+            var text = document.getElementById("qrText").value;
+            var qrcodeContainer = document.getElementById("qrcode");
+            qrcodeContainer.innerHTML = ""; // Xóa mã QR cũ nếu có
+
+            QRCode.toDataURL(text, { 
+                errorCorrectionLevel: 'H' // Sử dụng cấp độ sửa lỗi cao nhất
+            }, function (err, url) {
+                if (err) {
+                    console.error(err);
+                    showToast("Không thể tạo mã QR. Vui lòng kiểm tra lại văn bản.", 'error');
+                    return;
+                }
+                var img = document.createElement('img');
+                img.src = url;
+                qrcodeContainer.appendChild(img);
+
+                // Cập nhật liên kết tải xuống
+                var downloadQR = document.getElementById("downloadQR");
+                downloadQR.href = url;
+                downloadQR.style.display = 'inline-block'; // Hiển thị nút tải xuống
+                showToast("Đã tạo mã QR thành công!", 'success');
+            });
+        }
+
+        function generateBarcode() {
+            var text = document.getElementById("barcodeText").value;
+            if (text.trim() === "") {
+                showToast("Vui lòng nhập văn bản cho mã vạch.", 'warning');
+                return;
+            }
+
+            var svg = document.getElementById("barcode");
+            JsBarcode(svg, text, {
+                format: "CODE128",
+                lineColor: "#000",
+                width: 2,
+                height: 100,
+                displayValue: true
+            }).catch(function(error) {
+                console.error(error);
+                showToast("Không thể tạo mã vạch. Hãy đảm bảo văn bản nhập hợp lệ.", 'error');
+            });
+
+            // Tạo URL hình ảnh từ SVG và gán vào thẻ tải xuống
+            var downloadLink = document.getElementById("downloadBarcode");
+            setTimeout(() => {
+                var svgData = new XMLSerializer().serializeToString(svg);
+                var canvas = document.createElement("canvas");
+                var ctx = canvas.getContext("2d");
+
+                var img = new Image();
+                img.onload = function() {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+                    var pngFile = canvas.toDataURL("image/png");
+                    downloadLink.href = pngFile;
+                    downloadLink.style.display = 'inline-block'; // Hiển thị nút tải xuống
+                    showToast("Đã tạo mã vạch thành công!", 'success');
+                };
+                img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+            }, 250);
+        }
+    </script>
+
+    <!-- Thêm Bootstrap JS và các phụ thuộc -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
